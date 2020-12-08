@@ -47,7 +47,8 @@ def compress(input_file_path, output_file_path, power=0):
 
     print("Compress PDF...")
     initial_size = os.path.getsize(input_file_path)
-    subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+    gs = "gswin64" if sys.platform.startswith("win32") else "gs"
+    subprocess.call([gs, '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
                     '-dPDFSETTINGS={}'.format(quality[power]),
                     '-dNOPAUSE', '-dQUIET', '-dBATCH',
                     '-sOutputFile={}'.format(output_file_path),
